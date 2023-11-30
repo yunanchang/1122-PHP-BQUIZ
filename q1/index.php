@@ -1,3 +1,4 @@
+<?php include_once "db.php";?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +30,23 @@
         <td>刪除</td>
         <td></td>
     </tr>
+    <?php
+    
+    $rows=$Title->all();
+    foreach($rows as $row){
+    ?>
     <tr>
-        <td><img src="" style="width:300px;height:30px"></td>
-        <td><input type="text" name="" id="" style="width:90%"></td>
-        <td><input type="radio" name="" id=""></td>
-        <td><input type="checkbox" name="" id=""></td>
+    <td><img src="./img/<?=$row['img'];?>" style="width:300px;height:30px"></td>
+        <td><input type="text" name="text[]" id="" value="<?=$row['text'];?>" style="width:90%"></td>
+        <td><input type="radio" name="sh" id="" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>></td>
+        <td><input type="checkbox" name="del[]" id="" value="<?=$row['id'];?>"></td>
         <td><input class='btn btn-primary' type="button" value="更新圖片"></td>
+        <input type="hidden" name="id[]" value="<?=$row['id'];?>">
+      
     </tr>
+    <?php
+    }
+    ?>
 </table>
 <div class="d-flex justify-content-between">
     <div><input type="button" onclick="op('#cover','#cvr','title.php')" value="新增網站標題圖片"></div>
